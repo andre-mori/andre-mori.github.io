@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos del Máster — Andrea Moríñigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f4ef; --bg2: #edeae3; --surface: #ffffff;
+      --border: #ddd9d0; --text: #2a2520; --muted: #7a746a;
+      --accent: #3d7a6e; --accent2: #8fada8; --accent-light: #e6f0ee;
+      --radius: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 3rem;
+      background: rgba(247,244,239,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--accent); text-decoration: none; }
+    .back-btn { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 600; transition: color 0.2s; }
+    .back-btn:hover { color: var(--accent); }
+
+    .hero {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 3rem; text-align: center;
+    }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; font-weight: 700; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 0.8rem; }
+    .hero p { color: var(--muted); font-size: 1rem; max-width: 560px; margin: 0 auto; }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin: 0.8rem auto 0; border-radius: 2px; }
+
+    main { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+      transition: all 0.25s;
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    .card.active { cursor: pointer; text-decoration: none; color: var(--text); }
+    .card.active:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(61,122,110,0.12); border-color: var(--accent2); }
+    .card.active:hover::before { opacity: 1; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.3s; }
+    .card.wip { opacity: 0.45; }
+
+    .card-icon { font-size: 2.2rem; }
+    .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+    .card p { font-size: 0.82rem; color: var(--muted); }
+    .wip-badge {
+      position: absolute; top: 10px; right: -24px;
+      background: var(--accent2); color: white;
+      font-size: 0.62rem; font-weight: 700;
+      padding: 0.2rem 2rem; transform: rotate(45deg);
+      letter-spacing: 0.08em;
+    }
+    .card-cta { font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; margin-top: auto; }
+    .wip .card-cta { color: var(--muted); }
+
+    footer { text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .card { opacity: 0; animation: fadeUp 0.5s forwards; }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.12s; }
+    .card:nth-child(3) { animation-delay: 0.19s; }
+    .card:nth-child(4) { animation-delay: 0.26s; }
+    .card:nth-child(5) { animation-delay: 0.33s; }
+    .card:nth-child(6) { animation-delay: 0.40s; }
+    .card:nth-child(7) { animation-delay: 0.47s; }
+    .card:nth-child(8) { animation-delay: 0.54s; }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.2rem; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      main { padding: 3rem 1.2rem; }
+    }
+    @media (max-width: 450px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="index.html">Andrea Moríñigo</a>
+    <a class="back-btn" href="index.html">← Volver al portfolio</a>
+  </nav>
+
+  <div class="hero">
+    <p class="section-label">Máster en Bioinformática · UNIR</p>
+    <h1>Asignaturas Impartidas</h1>
+    <div class="divider"></div>
+    <p style="margin-top:1rem;">¡Echa un vistazo a mi trabajo en las distintas asignaturas!</p>
+  </div>
+
+  <main>
+    <div class="grid">
+
+      <!-- ACTIVAS -->
+      <a href="#" class="card active">
+        <div class="card-icon">⚖️</div>
+        <h3>Aspectos éticos, legales y sociales en Bioinformática</h3>
+        <p>Implicaciones éticas y legales del uso de datos biológicos</p>
+        <span class="card-cta">Ver proyectos →</span>
+      </a>
+
+      <a href="#" class="card active">
+        <div class="card-icon">🤖</div>
+        <h3>Algoritmos e inteligencia artificial</h3>
+        <p>Aplicación de IA y ML en bioinformática</p>
+        <span class="card-cta">Ver proyectos →</span>
+      </a>
+
+      <a href="#" class="card active">
+        <div class="card-icon">R</div>
+        <h3>Estadística y R para Ciencias de la Salud</h3>
+        <p>Análisis estadístico y visualización con R</p>
+        <span class="card-cta">Ver proyectos →</span>
+      </a>
+
+      <a href="#" class="card active">
+        <div class="card-icon">🗄️</div>
+        <h3>Bases de datos</h3>
+        <p>Diseño y gestión de bases de datos biológicas</p>
+        <span class="card-cta">Ver proyectos →</span>
+      </a>
+
+      <a href="#" class="card active">
+        <div class="card-icon">🐍</div>
+        <h3>Programación con Python</h3>
+        <p>Pandas, NumPy, Matplotlib y Scikit-learn aplicados a datos ómicos</p>
+        <span class="card-cta">Ver proyectos →</span>
+      </a>
+
+      <!-- WIP -->
+      <div class="card wip">
+        <div class="wip-badge">WIP</div>
+        <div class="card-icon">🧬</div>
+        <h3>Genética clínica y poblacional</h3>
+        <p>Análisis de variantes y genética de poblaciones</p>
+        <span class="card-cta">Próximamente</span>
+      </div>
+
+      <div class="card wip">
+        <div class="wip-badge">WIP</div>
+        <div class="card-icon">&lt;/&gt;</div>
+        <h3>Programación científica</h3>
+        <p>Herramientas y lenguajes para ciencia computacional</p>
+        <span class="card-cta">Próximamente</span>
+      </div>
+
+      <div class="card wip">
+        <div class="wip-badge">WIP</div>
+        <div class="card-icon">🔭</div>
+        <h3>Secuenciación y Ómicas de Próxima Generación</h3>
+        <p>NGS, metabarcoding y análisis de microbiomas</p>
+        <span class="card-cta">Próximamente</span>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Andrea Moríñigo Velaz · <a href="index.html">Volver al portfolio</a></p>
+  </footer>
+
+</body>
+</html>
